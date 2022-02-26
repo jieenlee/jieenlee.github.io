@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)https://webbit.webduino.io/blockly/live-preview.html#noDYmq9Jl0jN0DnV0lJa -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Web:Bit</title>
+  <script type="text/javascript" async="" src="./Web_Bit_files/analytics.js.下載"></script><script async="" src="./Web_Bit_files/js"></script>
+  <script src="./Web_Bit_files/google-gtag.min.js.下載"></script>
+  <link rel="stylesheet" href="./Web_Bit_files/jquery-ui.min.css">
+  <script src="./Web_Bit_files/jquery.min.js.下載"></script>
+  <script src="./Web_Bit_files/webduino-all.min.js.下載"></script>
+  <script src="./Web_Bit_files/BitIRled.min.js.下載"></script>
+  <script src="./Web_Bit_files/BitIRRecv.min.js.下載"></script>
+  <script src="./Web_Bit_files/edu.min.js.下載"></script>
+  <script src="./Web_Bit_files/edu-mpu9250.min.js.下載"></script>
+  <script src="./Web_Bit_files/edu-blockly.min.js.下載"></script>
+  <script src="./Web_Bit_files/MessageTransport.min.js.下載"></script>
+  <script src="./Web_Bit_files/webduino-blockly.min.js.下載"></script>
+  <script src="./Web_Bit_files/firebase.min.js.下載"></script>
+  <script src="./Web_Bit_files/runtime.min.js.下載"></script>
+  <link rel="stylesheet" href="./Web_Bit_files/main.css">
+  <link rel="stylesheet" href="./Web_Bit_files/english.css">
+</head>
+
+<body>
+  <div id="bg"></div>
+  <div id="userHtml"></div>
+  <span id="reset">↻</span>
+  <div id="youtube-container">
+    <div id="player"></div>
+  </div>
+  <div id="recordingArea">
+    <svg version="1.1" id="mic_icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 21 23" width="26px" height="36px" xml:space="preserve">
+      <path id="mic" d="M5,10.8V4.6C5,2.1,7,0,9.5,0c2.5,0,4.6,2.1,4.6,4.6v6.3c0,2.5-2.1,4.6-4.6,4.6C7,15.4,5,13.3,5,10.8z M17.3,10.4
+   c0-0.4-0.3-0.8-0.8-0.8s-0.8,0.3-0.8,0.8c0,3.4-2.8,6.2-6.2,6.2s-6.2-2.8-6.2-6.2C3.3,10,3,9.7,2.5,9.7S1.8,10,1.8,10.4
+   c0,4,3.1,7.3,7,7.7v1.7H5.4c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8h8.2c0.4,0,0.8-0.3,0.8-0.8s-0.3-0.8-0.8-0.8h-3.4v-1.7
+   C14.2,17.7,17.3,14.4,17.3,10.4z"></path>
+      <g id="mic_stop">
+        <path class="st1" d="M2,20.3c-0.2,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.3L17.7,2.3c0.4-0.4,1-0.4,1.3,0c0.4,0.4,0.4,1,0,1.3L2.6,20
+     C2.4,20.2,2.2,20.3,2,20.3z"></path>
+        <path class="st2" d="M18.3,2c0.2,0,0.5,0.1,0.7,0.3c0.4,0.4,0.4,1,0,1.3L2.6,20c-0.2,0.2-0.4,0.3-0.7,0.3c-0.2,0-0.5-0.1-0.7-0.3
+     c-0.4-0.4-0.4-1,0-1.3L17.7,2.3C17.8,2.1,18.1,2,18.3,2 M18.3,1c-0.5,0-1,0.2-1.4,0.6L0.6,17.9C0.2,18.3,0,18.8,0,19.3
+     s0.2,1,0.6,1.4c0.4,0.4,0.9,0.6,1.4,0.6c0.5,0,1-0.2,1.4-0.6L19.7,4.3C20.1,4,20.3,3.5,20.3,3s-0.2-1-0.6-1.4
+     C19.3,1.2,18.8,1,18.3,1L18.3,1z"></path>
+      </g>
+    </svg>
+  </div>
+  <div id="tracker-container" hidden="">
+    <div id="tracker-wrap">
+      <video id="trackingVideo" width="320" height="240" preload="" autoplay="" loop="" muted="" controls=""></video>
+      <canvas id="trackingCanvas" width="320" height="240"></canvas>
+      <canvas id="trackingCanvasColor" width="320" height="240"></canvas>
+    </div>
+  </div>
+  <div id="videoDetect-container">
+    <div id="videoDetect-wrap">
+      <canvas id="videoDetectCanvas" width="320" height="240"></canvas>
+    </div>
+  </div>
+
+  <!-- 英語會話區 -->
+  <div id="edu_English" hidden="">
+    <!-- 標題 title -->
+    <h3 id="edu_title"><b>In the Cabin</b><i></i></h3>
+
+    <!-- 角色位置由 class 決定，如果沒有位置 class 則自動隱藏，加上 computer 表示電腦正在發音朗讀 -->
+    <div id="edu_01" class="character top left computer">
+      <!-- 圖片比例為 寬:長 = 2:3 -->
+      <img>
+      <!-- 講話訊息，class 為 hidden 會隱藏 -->
+      <i class="msg">
+        <i class="name">
+          <b>Marty</b>
+          <img class="c-icon repeat-btn" src="./Web_Bit_files/icon-speaker.png">
+          <em class="c">電腦發音</em>
+          <img class="u-icon" src="./Web_Bit_files/icon-microphone.png">
+          <em class="u">換你朗讀</em>
+          <em class="pass"><a>( 跳過 )</a></em>
+        </i>
+        <i class="text">Welcome abroad. May I see your boarding pass?</i>
+      </i>
+    </div>
+    <!-- 加上 user 選項表示由使用者講 -->
+    <div id="edu_02" class="character bottom right user">
+      <img>
+      <i class="msg">
+          <i class="name">
+            <b>Sheng</b>
+            <img class="c-icon repeat-btn" src="./Web_Bit_files/icon-speaker.png">
+            <em class="c">電腦發音</em>
+            <img class="u-icon" src="./Web_Bit_files/icon-microphone.png">
+            <em class="u">換你朗讀</em>
+            <em class="pass"><a>( 跳過 )</a></em>
+          </i>
+          <i class="text">Here <b>you</b> are.</i>  <!-- 如果有錯誤，加上 b tag 表現 -->
+      </i>
+    </div>
+    <div id="edu_03" class="character top right">
+      <img>
+      <i class="msg">
+          <i class="name">
+            <b>Seven</b>
+            <img class="c-icon repeat-btn" src="./Web_Bit_files/icon-speaker.png">
+            <em class="c">電腦發音</em>
+            <img class="u-icon" src="./Web_Bit_files/icon-microphone.png">
+            <em class="u">換你朗讀</em>
+            <em class="pass"><a>( 跳過 )</a></em>
+          </i>
+          <i class="text">You are in seat 18A. </i>
+      </i>
+    </div>
+    <div id="edu_04" class="character bottom left">
+      <img>
+      <i class="msg">
+          <i class="name">
+            <b>OXXO</b>
+            <img class="c-icon repeat-btn" src="./Web_Bit_files/icon-speaker.png">
+            <em class="c">電腦發音</em>
+            <img class="u-icon" src="./Web_Bit_files/icon-microphone.png">
+            <em class="u">換你朗讀</em>
+            <em class="pass"><a>( 跳過 )</a></em>
+          </i>
+          <i class="text">Thank you.</i>
+      </i>
+    </div>
+    <!-- 提示訊息，class 為 hidden 會隱藏 -->
+    <h3 id="edu_notify" class="hidden">
+      <i>全對啦！好棒棒！</i>     <!-- 提示訊息放這邊 -->
+      <a class="retry hidden">重試</a> <!-- 加上 hidden 就會隱藏 -->
+      <a class="pass hidden">略過</a>  <!-- 加上 hidden 就會隱藏 -->
+    </h3>
+    <img src="./Web_Bit_files/live-preview.html" class="bg">
+
+    <!-- 過關畫面 -->
+    <div id="passPicture" class="pass-bg hidden">
+      <img src="./Web_Bit_files/congratulations.jpg">
+    </div>
+
+    <!-- 提示音效 -->
+    <audio id="hintSound" data-src="custom-blocks/english-conversation/hintSound.mp3"></audio>
+    <audio id="passSound" data-src="custom-blocks/english-conversation/pass.mp3"></audio>
+  </div>
+
+  <div id="inputArea">
+    <input id="input" autocomplete="off" autofocus=""><span id="send">✔</span>
+  </div>
+  <div id="demoMonster01" class="monster" style="left: 230px; bottom: 7px; width: 90px; height: 90px; z-index: 15; display: block;">
+    <span class="talk"></span>
+    <div class="m-img" attr-emotion="0" style="transform: rotate(0deg);"></div>
+  </div>
+  <div id="demoMonster02" class="monster" style="left: 230px; bottom: 92px; width: 90px; height: 90px; z-index: 14; display: block;">
+    <span class="talk"></span>
+    <div class="m-img" attr-emotion="0" style="transform: rotate(0deg);"></div>
+  </div>
+  <div id="demoMonster03" class="monster" style="left: 227px; bottom: 252px; width: 90px; height: 90px; z-index: 11; display: block;">
+    <span class="talk"></span>
+    <div class="m-img" attr-emotion="0" style="transform: rotate(0deg);"></div>
+  </div>
+  <div id="demoMonster04" class="monster" style="left: 228px; bottom: 170px; width: 90px; height: 90px; z-index: 13; display: block;">
+    <span class="talk"></span>
+    <div class="m-img" attr-emotion="0" style="transform: rotate(0deg);"></div>
+  </div>
+
+  <div id="sound01" style="display:none;">
+    <audio data-src="media/sound/cat-01.mp3" class="sound cat-01"></audio>
+    <audio data-src="media/sound/dog-01.mp3" class="sound dog-01"></audio>
+    <audio data-src="media/sound/crow-01.mp3" class="sound crow-01"></audio>
+    <audio data-src="media/sound/elephant-01.mp3" class="sound elephant-01"></audio>
+    <audio data-src="media/sound/frog-01.mp3" class="sound frog-01"></audio>
+    <audio data-src="media/sound/lion-01.mp3" class="sound lion-01"></audio>
+    <audio data-src="media/sound/goat-01.mp3" class="sound goat-01"></audio>
+    <audio data-src="media/sound/chicken-01.mp3" class="sound chicken-01"></audio>
+    <audio data-src="media/sound/chicken-02.mp3" class="sound chicken-02"></audio>
+    <audio data-src="media/sound/monkey-01.mp3" class="sound monkey-01"></audio>
+    <audio data-src="media/sound/duck-01.mp3" class="sound duck-01"></audio>
+    <audio data-src="media/sound/mouse-01.mp3" class="sound mouse-01"></audio>
+    <audio data-src="media/sound/pig-01.mp3" class="sound pig-01"></audio>
+  </div>
+  <div id="sound02" style="display:none;">
+    <audio data-src="media/sound/sneeze-01.mp3" class="sound sneeze-01"></audio>
+    <audio data-src="media/sound/laugth-01.mp3" class="sound laugth-01"></audio>
+    <audio data-src="media/sound/cough-01.mp3" class="sound cough-01"></audio>
+    <audio data-src="media/sound/kiss-01.mp3" class="sound kiss-01"></audio>
+    <audio data-src="media/sound/applaud-01.mp3" class="sound applaud-01"></audio>
+    <audio data-src="media/sound/cry-01.mp3" class="sound cry-01"></audio>
+    <audio data-src="media/sound/snoring-01.mp3" class="sound snoring-01"></audio>
+    <audio data-src="media/sound/fart-01.mp3" class="sound fart-01"></audio>
+    <audio data-src="media/sound/whistle-01.mp3" class="sound whistle-01"></audio>
+    <audio data-src="media/sound/snore-01.mp3" class="sound snore-01"></audio>
+    <audio data-src="media/sound/sigh-01.mp3" class="sound sigh-01"></audio>
+    <audio data-src="media/sound/sigh-02.mp3" class="sound sigh-02"></audio>
+  </div>
+
+  <div id="sound03" style="display:none;">
+    <audio data-src="media/sound/sound-01.mp3" class="sound sound-01"></audio>
+    <audio data-src="media/sound/sound-02.mp3" class="sound sound-02"></audio>
+    <audio data-src="media/sound/sound-03.mp3" class="sound sound-03"></audio>
+    <audio data-src="media/sound/sound-04.mp3" class="sound sound-04"></audio>
+    <audio data-src="media/sound/sound-05.mp3" class="sound sound-05"></audio>
+    <audio data-src="media/sound/sound-06.mp3" class="sound sound-06"></audio>
+    <audio data-src="media/sound/sound-07.mp3" class="sound sound-07"></audio>
+    <audio data-src="media/sound/sound-08.mp3" class="sound sound-08"></audio>
+    <audio data-src="media/sound/sound-09.mp3" class="sound sound-09"></audio>
+    <audio data-src="media/sound/sound-10.mp3" class="sound sound-10"></audio>
+    <audio data-src="media/sound/sound-11.mp3" class="sound sound-11"></audio>
+    <audio data-src="media/sound/coin-01.mp3" class="sound coin-01"></audio>
+    <audio data-src="media/sound/jump-01.mp3" class="sound jump-01"></audio>
+    <audio data-src="media/sound/death-01.mp3" class="sound death-01"></audio>
+    <audio data-src="media/sound/bell-01.mp3" class="sound bell-01"></audio>
+  </div>
+
+  <script src="./Web_Bit_files/main.min.js.下載"></script>
+
+  <script>
+'use strict';
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } step("next"); }); }; }
+
+_asyncToGenerator(regeneratorRuntime.mark(function _callee5() {
+  return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+
+          boardReady({ board: 'Bit', device: 'K3yHWdfgYiAGsJphnR', transport: 'mqtt', multi: true }, (function () {
+            var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(board) {
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return boardInit_(board, 250, 0);
+
+                    case 2:
+                      window._board_ = _context3.sent;
+
+                      btnEvent_(_board_._bit_btnA_, 'pressed', _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                          while (1) {
+                            switch (_context.prev = _context.next) {
+                              case 0:
+                                _board_._bit_matrix_.setColor("00cc00000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 3;
+                                return delay(1, true);
+
+                              case 3:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 6;
+                                return delay(1, true);
+
+                              case 6:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff0000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 9;
+                                return delay(1, true);
+
+                              case 9:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff00000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 12;
+                                return delay(1, true);
+
+                              case 12:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 15;
+                                return delay(1, true);
+
+                              case 15:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000");
+                                _context.next = 18;
+                                return delay(1, true);
+
+                              case 18:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff00001400000015000000160000001700000018000000");
+                                _context.next = 21;
+                                return delay(1, true);
+
+                              case 21:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff00001400000015000000160000001700000018ff0000");
+                                _context.next = 24;
+                                return delay(1, true);
+
+                              case 24:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff000014000000150000001600000017ff000018ff0000");
+                                _context.next = 27;
+                                return delay(1, true);
+
+                              case 27:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff0000140000001500000016ff000017ff000018ff0000");
+                                _context.next = 30;
+                                return delay(1, true);
+
+                              case 30:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff00001400000015ff000016ff000017ff000018ff0000");
+                                _context.next = 33;
+                                return delay(1, true);
+
+                              case 33:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff00000500000006000000070000000800000009ff00000a0000000b0000000c0000000d0000000eff00000f00000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 36;
+                                return delay(1, true);
+
+                              case 36:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff0000050000000600000007ff00000800000009ff00000a0000000b0000000c0000000d0000000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 39;
+                                return delay(1, true);
+
+                              case 39:
+                                //delay
+                                _board_._bit_matrix_.setColor("00cc000001cc000002cc000003cc000004cc00000500000006000000070000000800000009cc00000acc00000b0000000c0000000d0000000ecc00000fcc000010000000110000001200000013cc000014cc000015cc000016cc000017cc000018cc0000");
+                                _context.next = 42;
+                                return delay(1, true);
+
+                              case 42:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006000000070000000800000009ff00000aff00000b0000000c0000000d0000000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 45;
+                                return delay(1, true);
+
+                              case 45:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff0000070000000800000009ff00000aff00000b0000000c0000000d0000000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 48;
+                                return delay(1, true);
+
+                              case 48:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff00000800000009ff00000aff00000b0000000c0000000d0000000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 51;
+                                return delay(1, true);
+
+                              case 51:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000b0000000c0000000d0000000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 54;
+                                return delay(1, true);
+
+                              case 54:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000b0000000c0000000dff00000eff00000fff000010000000110000001200000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 57;
+                                return delay(1, true);
+
+                              case 57:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000b0000000c0000000dff00000eff00000fff0000100000001100000012ff000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 60;
+                                return delay(1, true);
+
+                              case 60:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000b0000000c0000000dff00000eff00000fff00001000000011ff000012ff000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 63;
+                                return delay(1, true);
+
+                              case 63:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000b0000000c0000000dff00000eff00000fff000010ff000011ff000012ff000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 66;
+                                return delay(1, true);
+
+                              case 66:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000bff00000c0000000dff00000eff00000fff000010ff000011ff000012ff000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 69;
+                                return delay(1, true);
+
+                              case 69:
+                                //delay
+                                _board_._bit_matrix_.setColor("00ff000001ff000002ff000003ff000004ff000005ff000006ff000007ff000008ff000009ff00000aff00000bff00000cff00000dff00000eff00000fff000010ff000011ff000012ff000013ff000014ff000015ff000016ff000017ff000018ff0000");
+                                _context.next = 72;
+                                return delay(1.5, true);
+
+                              case 72:
+                                _context.next = 74;
+                                return _board_._bit_matrix_.setStringOnce('welcome', '#44ccff', 2);
+
+                              case 74:
+                              case 'end':
+                                return _context.stop();
+                            }
+                          }
+                        }, _callee, this);
+                      })), [_board_._bit_btnA_, _board_._bit_btnB_]);btnEvent_(_board_._bit_btnB_, 'pressed', _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+                        var $pnlea390, count;
+                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                          while (1) {
+                            switch (_context2.prev = _context2.next) {
+                              case 0:
+                                $pnlea390 = _startLoop_();
+                                count = 0;
+
+                              case 2:
+                                if (!(count < 10)) {
+                                  _context2.next = 16;
+                                  break;
+                                }
+
+                                if (_loop_[$pnlea390]) {
+                                  _context2.next = 5;
+                                  break;
+                                }
+
+                                return _context2.abrupt('break', 16);
+
+                              case 5:
+                                _board_._bit_matrix_.setColor('#ffff00');
+                                _context2.next = 8;
+                                return delay(1, $pnlea390);
+
+                              case 8:
+                                _board_._bit_matrix_.setColor('#00cccc');
+                                _context2.next = 11;
+                                return delay(1, $pnlea390);
+
+                              case 11:
+                                _context2.next = 13;
+                                return delay(0.001, true);
+
+                              case 13:
+                                count++;
+                                _context2.next = 2;
+                                break;
+
+                              case 16:
+                              case 'end':
+                                return _context2.stop();
+                            }
+                          }
+                        }, _callee2, this);
+                      })), [_board_._bit_btnA_, _board_._bit_btnB_]);
+
+                    case 5:
+                    case 'end':
+                      return _context3.stop();
+                  }
+                }
+              }, _callee3, this);
+            }));
+
+            return function (_x) {
+              return ref.apply(this, arguments);
+            };
+          })());
+
+          btnEvent_(_board_._bit_btnA_, 'pressed', _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                  case 'end':
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          })), [_board_._bit_btnA_, _board_._bit_btnB_]);
+
+        case 2:
+        case 'end':
+          return _context5.stop();
+      }
+    }
+  }, _callee5, this);
+}))();
+</script>
+
+
+</body></html>
